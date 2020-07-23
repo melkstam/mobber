@@ -1,8 +1,14 @@
 import React from 'react';
+import { useMachine } from '@xstate/react'
+
 import logo from './logo.svg';
 import './App.css';
 
+import timerMachine from './lib/stateMachine/machine'
+
 function App() {
+  const [ state, send ] = useMachine(timerMachine);
+  
   return (
     <div className="App">
       <header className="App-header">
