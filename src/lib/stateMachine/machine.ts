@@ -5,9 +5,13 @@ interface TimerContext {
 
 interface TimerStates {
     states: {
-        stopped: {},
-        running: {},
-        paused: {},
+        timerOff: {},
+        timerOn: {
+          states: {
+            running: {},
+            paused: {}
+          }
+        }
     }
 }
 
@@ -22,23 +26,29 @@ type TimerEvent =
 
 const timerMachine = Machine<TimerContext, TimerStates, TimerEvent>({
   id: 'timerMachine',
-  initial: 'stopped',
+  initial: 'timerOff',
   states: {
-    stopped: {
+    timerOff: {
       on: {
-        START: 'running',
+        START: 'timerOn',
       },
     },
-    running: {
+    timerOn: {
       on: {
-        STOP: 'stopped',
-        PAUSE: 'paused',
+        STOP: 'timerOff',
       },
-    },
-    paused: {
-      on: {
-        STOP: 'stopped',
-        START: 'running',
+      initial: 'running',
+      states: {
+        running: {
+          on: {
+            PAUSE: 'paused',
+          },
+        },
+        paused: {
+          on: {
+            START: 'running',
+          },
+        },
       },
     },
   },
