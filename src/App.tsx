@@ -7,6 +7,7 @@ import './App.css';
 import timerMachine from './lib/stateMachine/machine';
 import OptionsPage from './pages/OptionsPage';
 import TimerPage from './pages/TimerPage';
+import Layout from './components/Layout';
 
 function App(): React.ReactElement {
   const [state, send] = useMachine(timerMachine);
@@ -24,9 +25,9 @@ function App(): React.ReactElement {
   }
 
   return (
-    <div>
+    <Layout>
       {contents}
-    </div>
+    </Layout>
   );
 }
 
