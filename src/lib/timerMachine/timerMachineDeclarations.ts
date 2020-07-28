@@ -19,8 +19,14 @@ export interface TimerStates {
 export type StartEvent = { type: 'START'};
 export type PauseEvent = { type: 'PAUSE'};
 export type StopEvent = { type: 'STOP'};
+export type UpdateTurnTimeEvent = { type: 'UPDATE_TURN_TIME', time: number };
+export type UpdateBreakTimeEvent = { type: 'UPDATE_BREAK_TIME', time: number };
+export type UpdateBreakTurnsEvent = { type: 'UPDATE_BREAK_TURNS', time: number };
 
 export type TimerEvent =
     | StartEvent
     | PauseEvent
-    | StopEvent;
+    | StopEvent
+    | UpdateTurnTimeEvent
+    | UpdateBreakTimeEvent
+    | UpdateBreakTurnsEvent;

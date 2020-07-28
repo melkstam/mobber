@@ -7,6 +7,7 @@ import {
   TimerStates,
   TimerEvent,
 } from './timerMachineDeclarations';
+import * as actions from './timerMachineActions';
 
 const timerMachine = Machine<TimerContext, TimerStates, TimerEvent>({
   id: 'timerMachine',
@@ -39,6 +40,17 @@ const timerMachine = Machine<TimerContext, TimerStates, TimerEvent>({
           },
         },
       },
+    },
+  },
+  on: {
+    UPDATE_TURN_TIME: {
+      actions: [actions.updateTurnTime],
+    },
+    UPDATE_BREAK_TIME: {
+      actions: [actions.updateBreakTime],
+    },
+    UPDATE_BREAK_TURNS: {
+      actions: [actions.updateBreakTurns],
     },
   },
 });
