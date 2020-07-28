@@ -1,32 +1,21 @@
-import { Machine } from 'xstate';
+import {
+  Machine, State, Interpreter,
+} from 'xstate';
 
-interface TimerContext {
-}
-
-interface TimerStates {
-    states: {
-        timerOff: {},
-        timerOn: {
-          states: {
-            running: {},
-            paused: {}
-          }
-        }
-    }
-}
-
-type StartEvent = { type: 'START'};
-type PauseEvent = { type: 'PAUSE'};
-type StopEvent = { type: 'STOP'};
-
-type TimerEvent =
-    | StartEvent
-    | PauseEvent
-    | StopEvent;
+import {
+  TimerContext,
+  TimerStates,
+  TimerEvent,
+} from './timerMachineDeclarations';
 
 const timerMachine = Machine<TimerContext, TimerStates, TimerEvent>({
   id: 'timerMachine',
   initial: 'timerOff',
+  context: {
+    turnTime: 8,
+    breakTime: 12,
+    breakTurns: 6,
+  },
   states: {
     timerOff: {
       on: {
@@ -55,3 +44,6 @@ const timerMachine = Machine<TimerContext, TimerStates, TimerEvent>({
 });
 
 export default timerMachine;
+
+export type TimerState = State<TimerContext, TimerEvent, TimerStates>;
+export type TimerSend = Interpreter<TimerContext, TimerStates, TimerEvent>['send'];

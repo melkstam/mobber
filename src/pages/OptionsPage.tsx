@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 
+import { TimerState, TimerSend } from '../lib/timerMachine/timerMachine';
 interface OptionsPageProps {
 
 }

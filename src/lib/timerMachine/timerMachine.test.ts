@@ -1,5 +1,5 @@
 import { interpret } from 'xstate';
-import timerMachine from './machine';
+import timerMachine from './timerMachine';
 
 describe('Timer machine', () => {
   it('should start in timer off state', () => {

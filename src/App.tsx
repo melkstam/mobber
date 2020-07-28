@@ -4,7 +4,7 @@ import { useMachine } from '@xstate/react';
 import logo from './logo.svg';
 import './App.css';
 
-import timerMachine from './lib/stateMachine/machine';
+import timerMachine from './lib/timerMachine/timerMachine';
 import OptionsPage from './pages/OptionsPage';
 import TimerPage from './pages/TimerPage';
 import Layout from './components/Layout';
