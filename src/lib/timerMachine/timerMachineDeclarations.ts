@@ -1,3 +1,5 @@
+import { State, Interpreter } from 'xstate';
+
 export interface TimerContext {
   turnTime: number;
   breakTime: number;
