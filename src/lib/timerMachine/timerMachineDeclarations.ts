@@ -21,7 +21,7 @@ export type PauseEvent = { type: 'PAUSE'};
 export type StopEvent = { type: 'STOP'};
 export type UpdateTurnTimeEvent = { type: 'UPDATE_TURN_TIME', time: number };
 export type UpdateBreakTimeEvent = { type: 'UPDATE_BREAK_TIME', time: number };
-export type UpdateBreakTurnsEvent = { type: 'UPDATE_BREAK_TURNS', time: number };
+export type UpdateBreakTurnsEvent = { type: 'UPDATE_BREAK_TURNS', turns: number };
 
 export type TimerEvent =
     | StartEvent
@@ -30,3 +30,6 @@ export type TimerEvent =
     | UpdateTurnTimeEvent
     | UpdateBreakTimeEvent
     | UpdateBreakTurnsEvent;
+
+export type TimerState = State<TimerContext, TimerEvent, TimerStates>;
+export type TimerSend = Interpreter<TimerContext, TimerStates, TimerEvent>['send'];

@@ -132,7 +132,7 @@ describe('Timer machine', () => {
       timerService.start();
 
       const currentTurns = timerService.state.context.breakTurns;
-      timerService.send({ type: 'UPDATE_BREAK_TURNS', time: currentTurns + 1 });
+      timerService.send({ type: 'UPDATE_BREAK_TURNS', turns: currentTurns + 1 });
 
       expect(timerService.state.context.breakTurns).toBe(currentTurns + 1);
     });
@@ -142,7 +142,7 @@ describe('Timer machine', () => {
       timerService.start();
 
       const currentTurns = timerService.state.context.breakTurns;
-      timerService.send({ type: 'UPDATE_BREAK_TURNS', time: -100 });
+      timerService.send({ type: 'UPDATE_BREAK_TURNS', turns: -100 });
 
       expect(timerService.state.context.breakTurns).toBe(currentTurns);
     });
@@ -152,7 +152,7 @@ describe('Timer machine', () => {
       timerService.start();
 
       const currentTurns = timerService.state.context.breakTurns;
-      timerService.send({ type: 'UPDATE_BREAK_TURNS', time: Math.PI });
+      timerService.send({ type: 'UPDATE_BREAK_TURNS', turns: Math.PI });
 
       expect(timerService.state.context.breakTurns).toBe(currentTurns);
     });

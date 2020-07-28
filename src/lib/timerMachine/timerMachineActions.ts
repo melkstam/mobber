@@ -23,9 +23,9 @@ export const updateBreakTime = assign<TimerContext, UpdateBreakTimeEvent>({
 
 export const updateBreakTurns = assign<TimerContext, UpdateBreakTurnsEvent>({
   breakTurns: (context, event) => {
-    if (event.time <= 0 || !Number.isInteger(event.time)) {
+    if (event.turns <= 0 || !Number.isInteger(event.turns)) {
       return context.breakTurns;
     }
-    return event.time;
+    return event.turns;
   },
 });

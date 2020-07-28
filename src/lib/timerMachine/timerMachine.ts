@@ -56,6 +56,3 @@ const timerMachine = Machine<TimerContext, TimerStates, TimerEvent>({
 });
 
 export default timerMachine;
-
-export type TimerState = State<TimerContext, TimerEvent, TimerStates>;
-export type TimerSend = Interpreter<TimerContext, TimerStates, TimerEvent>['send'];
