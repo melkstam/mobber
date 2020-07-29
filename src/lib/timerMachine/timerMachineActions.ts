@@ -1,6 +1,6 @@
 import { assign } from 'xstate';
 import {
-  TimerContext, UpdateTurnTimeEvent, UpdateBreakTurnsEvent, UpdateBreakTimeEvent,
+  TimerContext, UpdateTurnTimeEvent, UpdateBreakTurnsEvent, UpdateBreakTimeEvent, UpdateActiveUsersEvent, UpdateInactiveUsersEvent,
 } from './timerMachineDeclarations';
 
 export const updateTurnTime = assign<TimerContext, UpdateTurnTimeEvent>({
@@ -28,4 +28,12 @@ export const updateBreakTurns = assign<TimerContext, UpdateBreakTurnsEvent>({
     }
     return event.turns;
   },
+});
+
+export const updateActiveUsers = assign<TimerContext, UpdateActiveUsersEvent>({
+  activeUsers: (_, event) => event.users,
+});
+
+export const updateInactiveUsers = assign<TimerContext, UpdateInactiveUsersEvent>({
+  inactiveUsers: (_, event) => event.users,
 });

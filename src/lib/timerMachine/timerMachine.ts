@@ -16,6 +16,8 @@ const timerMachine = Machine<TimerContext, TimerStates, TimerEvent>({
     turnTime: 8,
     breakTime: 12,
     breakTurns: 6,
+    activeUsers: ['Ville', 'Ida'],
+    inactiveUsers: ['John', 'Frans'],
   },
   states: {
     timerOff: {
@@ -51,6 +53,12 @@ const timerMachine = Machine<TimerContext, TimerStates, TimerEvent>({
     },
     UPDATE_BREAK_TURNS: {
       actions: [actions.updateBreakTurns],
+    },
+    UPDATE_ACTIVE_USERS: {
+      actions: [actions.updateActiveUsers],
+    },
+    UPDATE_INACTIVE_USERS: {
+      actions: [actions.updateInactiveUsers],
     },
   },
 });
