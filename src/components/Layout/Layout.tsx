@@ -5,6 +5,9 @@ import {
 } from '@material-ui/core';
 import { deepOrange } from '@material-ui/core/colors';
 
+import 'typeface-roboto';
+import 'typeface-roboto-mono';
+
 const darkTheme = createMuiTheme({
   palette: {
     type: 'dark',
