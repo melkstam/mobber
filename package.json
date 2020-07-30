@@ -27,7 +27,7 @@
     "build": "react-scripts build",
     "build-electron": "mkdir build/src && cp -r electron/. build/electron",
     "package": "npm run build && npm run build-electron && electron-builder build -c.extraMetadata.main=build/electron/main.js --publish never",
-    "test": "react-scripts test"
+    "test": "react-scripts test --env=jest-environment-jsdom-sixteen"
   },
   "build": {
     "appId": "com.melkstam.mobber",
@@ -61,6 +61,7 @@
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react": "^7.20.0"
+    "eslint-plugin-react": "^7.20.0",
+    "jest-environment-jsdom-sixteen": "^1.0.3"
   }
 }
