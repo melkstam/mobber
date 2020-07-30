@@ -8,10 +8,12 @@ import { TimerState, TimerSend } from '../../lib/timerMachine/timerMachineDeclar
 import UserChip from '../UserChip';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
+  container: {
+    width: '100%',
+  },
   usersBox: {
     display: 'flex',
     flexDirection: 'column',
-    width: '100%',
     padding: theme.spacing(1),
     '&:not(:last-child)': {
       marginBottom: theme.spacing(2),
@@ -71,7 +73,7 @@ export default function UsersOptions({ state, send }: UsersOptionsProps): ReactE
 
   const classes = useStyles();
   return (
-    <>
+    <div className={classes.container}>
       <Paper className={classes.usersBox}>
         <Typography variant="h6">
           Active users
@@ -127,6 +129,6 @@ export default function UsersOptions({ state, send }: UsersOptionsProps): ReactE
           ))}
         </div>
       </Paper>
-    </>
+    </div>
   );
 }

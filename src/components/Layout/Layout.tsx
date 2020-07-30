@@ -15,8 +15,13 @@ const darkTheme = createMuiTheme({
 });
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
-  appBar: {
+  appContainer: {
+    height: 'calc(100vh - 64px)',
+    padding: theme.spacing(2),
+  },
+  toolBar: {
     backgroundColor: theme.palette.grey[900],
+    minHeight: 64,
   },
 }));
 
@@ -32,21 +37,19 @@ export default function Layout({ children }: LayoutProps): ReactElement {
 
       <AppBar
         position="sticky"
-        className={classes.appBar}
       >
-        <Toolbar>
-          <Typography variant="h6">
+        <Toolbar className={classes.toolBar}>
+          <Typography variant="h5">
             Mobber
           </Typography>
         </Toolbar>
       </AppBar>
 
-      <Container>
+      <Container className={classes.appContainer}>
         <>
           {children}
         </>
       </Container>
-
     </ThemeProvider>
   );
 }
