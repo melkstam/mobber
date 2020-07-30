@@ -3,6 +3,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 import { TimerState, TimerSend } from '../lib/timerMachine/timerMachineDeclarations';
 import TimerOptions from '../components/TimerOptions';
+import UsersOptions from '../components/UsersOptions';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   optionsContainer: {
@@ -22,6 +23,10 @@ export default function OptionsPage({ state, send }: OptionsPageProps): ReactEle
   return (
     <div className={classes.optionsContainer}>
       <TimerOptions
+        state={state}
+        send={send}
+      />
+      <UsersOptions
         state={state}
         send={send}
       />
