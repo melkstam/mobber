@@ -3,10 +3,14 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {
   CssBaseline, AppBar, Toolbar, Typography, makeStyles, Theme, createStyles, Container,
 } from '@material-ui/core';
+import { deepOrange } from '@material-ui/core/colors';
 
 const darkTheme = createMuiTheme({
   palette: {
     type: 'dark',
+    primary: {
+      main: deepOrange['900'],
+    },
   },
 });
 
