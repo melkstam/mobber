@@ -70,9 +70,11 @@ describe('Timer machine', () => {
         timerService.start();
 
         const currentTurnTime = timerService.state.context.turnTime;
+        const currentTimeLeft = timerService.state.context.timeLeft;
         timerService.send({ type: 'UPDATE_TURN_TIME', time: currentTurnTime + 1 });
 
         expect(timerService.state.context.turnTime).toBe(currentTurnTime + 1);
+        expect(timerService.state.context.timeLeft).toBe(currentTimeLeft + 60000);
       });
 
       it('should not set negative turn time on UPDATE_TURN_TIME event', () => {
@@ -80,9 +82,11 @@ describe('Timer machine', () => {
         timerService.start();
 
         const currentTurnTime = timerService.state.context.turnTime;
+        const currentTimeLeft = timerService.state.context.timeLeft;
         timerService.send({ type: 'UPDATE_TURN_TIME', time: -100 });
 
         expect(timerService.state.context.turnTime).toBe(currentTurnTime);
+        expect(timerService.state.context.timeLeft).toBe(currentTimeLeft);
       });
 
       it('should not set non-integer turn time on UPDATE_TURN_TIME event', () => {
@@ -90,9 +94,11 @@ describe('Timer machine', () => {
         timerService.start();
 
         const currentTurnTime = timerService.state.context.turnTime;
+        const currentTimeLeft = timerService.state.context.timeLeft;
         timerService.send({ type: 'UPDATE_TURN_TIME', time: Math.PI });
 
         expect(timerService.state.context.turnTime).toBe(currentTurnTime);
+        expect(timerService.state.context.timeLeft).toBe(currentTimeLeft);
       });
     });
 
@@ -137,6 +143,7 @@ describe('Timer machine', () => {
         timerService.send({ type: 'UPDATE_BREAK_TURNS', turns: currentTurns + 1 });
 
         expect(timerService.state.context.breakTurns).toBe(currentTurns + 1);
+        expect(timerService.state.context.turnsLeft).toBe(currentTurns + 1);
       });
 
       it('should not set negative turn time on UPDATE_BREAK_TURNS event', () => {
@@ -147,6 +154,7 @@ describe('Timer machine', () => {
         timerService.send({ type: 'UPDATE_BREAK_TURNS', turns: -100 });
 
         expect(timerService.state.context.breakTurns).toBe(currentTurns);
+        expect(timerService.state.context.turnsLeft).toBe(currentTurns);
       });
 
       it('should not set non-integer turn time on UPDATE_BREAK_TURNS event', () => {
@@ -157,6 +165,7 @@ describe('Timer machine', () => {
         timerService.send({ type: 'UPDATE_BREAK_TURNS', turns: Math.PI });
 
         expect(timerService.state.context.breakTurns).toBe(currentTurns);
+        expect(timerService.state.context.turnsLeft).toBe(currentTurns);
       });
     });
 
@@ -181,6 +190,64 @@ describe('Timer machine', () => {
         timerService.send({ type: 'UPDATE_INACTIVE_USERS', users: inactiveUsers });
 
         expect(timerService.state.context.inactiveUsers).toBe(inactiveUsers);
+      });
+    });
+
+    describe('TICK_TIMER', () => {
+      it('should decrease time left with 100 ms', () => {
+        const timerService = interpret(timerMachine);
+        timerService.start();
+
+        const currentTimeLeft = timerService.state.context.timeLeft;
+        timerService.send('TICK');
+
+        expect(timerService.state.context.timeLeft).toBe(currentTimeLeft - 100);
+      });
+    });
+
+    describe('NEXT_TURN', () => {
+      it('should set state paused when state is running', () => {
+        const timerService = interpret(timerMachine);
+        timerService.start();
+
+        timerService.send('START');
+        timerService.send('NEXT_TURN');
+
+        expect(timerService.state.matches({ timerOn: 'paused' })).toBeTruthy();
+      });
+
+      it('should set state paused when state is paused', () => {
+        const timerService = interpret(timerMachine);
+        timerService.start();
+
+        timerService.send('START');
+        timerService.send('PAUSE');
+        timerService.send('NEXT_TURN');
+
+        expect(timerService.state.matches({ timerOn: 'paused' })).toBeTruthy();
+      });
+    });
+
+    describe('PREV_TURN', () => {
+      it('should set state paused when state is running', () => {
+        const timerService = interpret(timerMachine);
+        timerService.start();
+
+        timerService.send('START');
+        timerService.send('PREV_TURN');
+
+        expect(timerService.state.matches({ timerOn: 'paused' })).toBeTruthy();
+      });
+
+      it('should set state paused when state is paused', () => {
+        const timerService = interpret(timerMachine);
+        timerService.start();
+
+        timerService.send('START');
+        timerService.send('PAUSE');
+        timerService.send('PREV_TURN');
+
+        expect(timerService.state.matches({ timerOn: 'paused' })).toBeTruthy();
       });
     });
   });

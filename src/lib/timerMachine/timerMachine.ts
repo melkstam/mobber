@@ -1,5 +1,5 @@
 import {
-  Machine, State, Interpreter,
+  Machine,
 } from 'xstate';
 
 import {
@@ -16,8 +16,10 @@ const timerMachine = Machine<TimerContext, TimerStates, TimerEvent>({
     turnTime: 8,
     breakTime: 12,
     breakTurns: 6,
-    activeUsers: ['Ville', 'Ida'],
+    activeUsers: ['Ville', 'Ida', 'Ralph'],
     inactiveUsers: ['John', 'Frans'],
+    timeLeft: 8 * 60 * 1000, // turn time in ms
+    turnsLeft: 6,
   },
   states: {
     timerOff: {
@@ -28,10 +30,22 @@ const timerMachine = Machine<TimerContext, TimerStates, TimerEvent>({
     timerOn: {
       on: {
         STOP: 'timerOff',
+        NEXT_TURN: {
+          target: '.paused',
+          actions: [actions.setNextTurn],
+        },
+        PREV_TURN: {
+          target: '.paused',
+          actions: [actions.setPrevTurn],
+        },
       },
       initial: 'running',
       states: {
         running: {
+          invoke: {
+            id: 'tickTimer',
+            src: actions.startTimer,
+          },
           on: {
             PAUSE: 'paused',
           },
@@ -45,6 +59,9 @@ const timerMachine = Machine<TimerContext, TimerStates, TimerEvent>({
     },
   },
   on: {
+    TICK: {
+      actions: [actions.tickTimer],
+    },
     UPDATE_TURN_TIME: {
       actions: [actions.updateTurnTime],
     },

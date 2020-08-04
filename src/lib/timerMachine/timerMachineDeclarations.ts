@@ -6,6 +6,8 @@ export interface TimerContext {
   breakTurns: number;
   activeUsers: string[];
   inactiveUsers: string[];
+  timeLeft: number;
+  turnsLeft: number;
 }
 
 export interface TimerStates {
@@ -23,6 +25,9 @@ export interface TimerStates {
 export type StartEvent = { type: 'START'};
 export type PauseEvent = { type: 'PAUSE'};
 export type StopEvent = { type: 'STOP'};
+export type TickEvent = { type: 'TICK'};
+export type NextTurnEvent = { type: 'NEXT_TURN'};
+export type PrevTurnEvent = { type: 'PREV_TURN'};
 export type UpdateTurnTimeEvent = { type: 'UPDATE_TURN_TIME', time: number };
 export type UpdateBreakTimeEvent = { type: 'UPDATE_BREAK_TIME', time: number };
 export type UpdateBreakTurnsEvent = { type: 'UPDATE_BREAK_TURNS', turns: number };
@@ -33,6 +38,9 @@ export type TimerEvent =
     | StartEvent
     | PauseEvent
     | StopEvent
+    | TickEvent
+    | NextTurnEvent
+    | PrevTurnEvent
     | UpdateTurnTimeEvent
     | UpdateBreakTimeEvent
     | UpdateBreakTurnsEvent

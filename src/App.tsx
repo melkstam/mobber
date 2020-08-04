@@ -21,7 +21,12 @@ function App(): React.ReactElement {
       />
     );
   } else {
-    contents = <TimerPage />;
+    contents = (
+      <TimerPage
+        state={state}
+        send={send}
+      />
+    );
   }
 
   return (
