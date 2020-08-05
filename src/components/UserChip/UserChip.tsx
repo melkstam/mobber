@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Tooltip, Chip } from '@material-ui/core';
+import { Chip } from '@material-ui/core';
 import { Steering } from 'mdi-material-ui';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({

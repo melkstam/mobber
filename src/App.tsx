@@ -1,7 +1,6 @@
 import React from 'react';
 import { useMachine } from '@xstate/react';
 
-import logo from './logo.svg';
 import './App.css';
 
 import timerMachine from './lib/timerMachine/timerMachine';

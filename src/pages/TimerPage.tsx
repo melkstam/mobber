@@ -4,7 +4,6 @@ import { Fab } from '@material-ui/core';
 import { Play, Pause } from 'mdi-material-ui';
 import { TimerSend, TimerState } from '../lib/timerMachine/timerMachineDeclarations';
 import CurrentUser from '../components/CurrentUser';
-import { msToText } from '../lib/utils';
 import TimerText from '../components/TimerText';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({

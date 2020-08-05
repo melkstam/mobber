@@ -2,7 +2,6 @@ import React, { ReactElement } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 import { Fab } from '@material-ui/core';
-import { Play } from 'mdi-material-ui';
 import { TimerState, TimerSend } from '../lib/timerMachine/timerMachineDeclarations';
 import TimerOptions from '../components/TimerOptions';
 import UsersOptions from '../components/UsersOptions';
