@@ -10,10 +10,10 @@ const createWindow = () => {
     !app.isPackaged
       ? process.env.ELECTRON_START_URL
       : url.format({
-          pathname: path.join(__dirname, '../index.html'),
-          protocol: 'file:',
-          slashes: true,
-        })
+        pathname: path.join(__dirname, '../index.html'),
+        protocol: 'file:',
+        slashes: true,
+      }),
   );
 
   mainWindow.once('ready-to-show', () => {
