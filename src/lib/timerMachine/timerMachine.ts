@@ -16,8 +16,8 @@ const timerMachine = Machine<TimerContext, TimerStates, TimerEvent>({
     turnTime: 8,
     breakTime: 12,
     breakTurns: 6,
-    activeUsers: ['Ville', 'Ida', 'Ralph'],
-    inactiveUsers: ['John', 'Frans'],
+    activeUsers: [],
+    inactiveUsers: [],
     timeLeft: 8 * 60 * 1000, // turn time in ms
     turnsLeft: 6,
   },
