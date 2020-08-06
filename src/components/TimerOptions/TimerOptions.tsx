@@ -58,6 +58,7 @@ export default function TimerOptions({ state, send }: TimerOptionsProps): ReactE
           }}
           value={state.context.turnTime}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => send({ type: 'UPDATE_TURN_TIME', time: Number(event.target.value) })}
+          onFocus={(event: React.FocusEvent<HTMLInputElement>) => event.target.select()}
         />
         <ButtonGroup
           className={classes.stepButtons}
@@ -93,6 +94,7 @@ export default function TimerOptions({ state, send }: TimerOptionsProps): ReactE
           }}
           value={state.context.breakTime}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => send({ type: 'UPDATE_BREAK_TIME', time: Number(event.target.value) })}
+          onFocus={(event: React.FocusEvent<HTMLInputElement>) => event.target.select()}
         />
         <ButtonGroup
           className={classes.stepButtons}
@@ -128,6 +130,7 @@ export default function TimerOptions({ state, send }: TimerOptionsProps): ReactE
           }}
           value={state.context.breakTurns}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => send({ type: 'UPDATE_BREAK_TURNS', turns: Number(event.target.value) })}
+          onFocus={(event: React.FocusEvent<HTMLInputElement>) => event.target.select()}
         />
         <ButtonGroup
           className={classes.stepButtons}
