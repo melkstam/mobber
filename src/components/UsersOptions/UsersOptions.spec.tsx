@@ -41,7 +41,7 @@ describe('<UsersOptions />', () => {
 
     const inputNewUser = getByPlaceholderText('New user…');
     fireEvent.change(inputNewUser, { target: { value: 'Olivia' } });
-    fireEvent.click(getByTestId('submitButton'));
+    fireEvent.click(getByTestId('submit-button'));
 
     expect(sendMock).toHaveBeenCalledTimes(1);
     expect(sendMock).toHaveBeenCalledWith(expect.objectContaining({ users: expect.arrayContaining(['Olivia']) }));
@@ -61,7 +61,7 @@ describe('<UsersOptions />', () => {
       />,
     );
 
-    fireEvent.click(getByTestId('submitButton'));
+    fireEvent.click(getByTestId('submit-button'));
 
     expect(sendMock).not.toHaveBeenCalled();
   });
