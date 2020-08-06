@@ -78,7 +78,7 @@ export default function UsersOptions({ state, send }: UsersOptionsProps): ReactE
         <Typography variant="h6">
           Active users
         </Typography>
-        <div>
+        <div data-testid="active-users-container">
           {state.context.activeUsers.map((user, index) => (
             <UserChip
               key={user}
@@ -93,6 +93,7 @@ export default function UsersOptions({ state, send }: UsersOptionsProps): ReactE
         <div className={classes.newUserContainer}>
           <TextField
             placeholder="New user…"
+            data-testid="add-new-user-input"
             aria-label="Add new user"
             margin="dense"
             value={name}
@@ -107,7 +108,7 @@ export default function UsersOptions({ state, send }: UsersOptionsProps): ReactE
           <IconButton
             size="small"
             onClick={handleOnAddUser}
-            data-testid="submitButton"
+            data-testid="submit-button"
           >
             <Plus />
           </IconButton>
@@ -118,7 +119,7 @@ export default function UsersOptions({ state, send }: UsersOptionsProps): ReactE
         <Typography variant="h6">
           Inactive users
         </Typography>
-        <div>
+        <div data-testid="inactive-users-container">
           {state.context.inactiveUsers.map((user, index) => (
             <UserChip
               key={user}

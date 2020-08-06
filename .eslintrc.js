@@ -10,6 +10,7 @@ module.exports = {
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
+        "plugin:cypress/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -21,7 +22,8 @@ module.exports = {
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "cypress"
     ],
     "settings": {
         "import/resolver": {

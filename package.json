@@ -2,45 +2,16 @@
   "name": "mobber2",
   "version": "0.1.0",
   "private": true,
-  "main": "electron/main.js",
   "homepage": "./",
-  "dependencies": {
-    "@material-ui/core": "^4.11.0",
-    "@testing-library/jest-dom": "^5.11.2",
-    "@testing-library/react": "^10.4.7",
-    "@testing-library/user-event": "^12.0.17",
-    "@types/jest": "^24.0.0",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
-    "@xstate/react": "^0.8.1",
-    "mdi-material-ui": "^6.17.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
-    "typeface-roboto": "^0.0.75",
-    "typeface-roboto-mono": "^0.0.75",
-    "typescript": "~3.7.2",
-    "xstate": "^4.11.0"
-  },
+  "main": "electron/main.js",
   "scripts": {
-    "start": "export BROWSER=none && react-scripts start",
-    "start-electron": "export ELECTRON_START_URL=http://localhost:3000 && electron .",
     "build": "react-scripts build",
     "build-electron": "mkdir build/src && cp -r electron/. build/electron",
     "package": "npm run build && npm run build-electron && electron-builder build -c.extraMetadata.main=build/electron/main.js --publish never",
-    "test": "react-scripts test --env=jest-environment-jsdom-sixteen"
-  },
-  "build": {
-    "appId": "com.melkstam.mobber",
-    "productName": "Mobber",
-    "files": [
-      "build/**/*",
-      "node_modules/**/*"
-    ]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "start": "export BROWSER=none && react-scripts start",
+    "start-electron": "export ELECTRON_START_URL=http://localhost:3000 && electron .",
+    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
+    "cypress:open": "cypress open"
   },
   "browserslist": {
     "production": [
@@ -54,16 +25,48 @@
       "last 1 safari version"
     ]
   },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@xstate/react": "^0.8.1",
+    "mdi-material-ui": "^6.17.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.1",
+    "typeface-roboto": "^0.0.75",
+    "typeface-roboto-mono": "^0.0.75",
+    "xstate": "^4.11.0"
+  },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.2",
+    "@testing-library/react": "^10.4.7",
+    "@testing-library/user-event": "^12.0.17",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
     "@typescript-eslint/eslint-plugin": "^3.7.0",
     "@typescript-eslint/parser": "^3.7.0",
+    "cypress": "^4.12.1",
     "electron": "^9.1.1",
     "electron-builder": "^22.7.0",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-cypress": "^2.11.1",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.0",
-    "jest-environment-jsdom-sixteen": "^1.0.3"
+    "jest-environment-jsdom-sixteen": "^1.0.3",
+    "typescript": "~3.7.2"
+  },
+  "build": {
+    "appId": "com.melkstam.mobber",
+    "productName": "Mobber",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ]
   }
 }
