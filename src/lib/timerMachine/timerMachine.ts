@@ -24,18 +24,19 @@ const timerMachine = Machine<TimerContext, TimerStates, TimerEvent>({
   states: {
     timerOff: {
       on: {
-        START: 'timerOn',
+        START: {
+          target: 'timerOn',
+          actions: [actions.start],
+        },
       },
     },
     timerOn: {
       on: {
         STOP: 'timerOff',
-        NEXT_TURN: {
-          target: '.paused',
-          actions: [actions.setNextTurn],
-        },
+
         PREV_TURN: {
           target: '.paused',
+          cond: (context) => context.turnsLeft < context.breakTurns,
           actions: [actions.setPrevTurn],
         },
       },
@@ -48,11 +49,53 @@ const timerMachine = Machine<TimerContext, TimerStates, TimerEvent>({
           },
           on: {
             PAUSE: 'paused',
+            NEXT_TURN: [
+              {
+                target: 'paused',
+                cond: (context) => context.turnsLeft > 0,
+                actions: [actions.setNextTurn],
+              }, {
+                target: 'breakPause',
+                cond: (context) => context.turnsLeft === 0,
+                actions: [actions.setBreak],
+              },
+            ],
           },
         },
         paused: {
           on: {
             START: 'running',
+            NEXT_TURN: [
+              {
+                cond: (context) => context.turnsLeft > 0,
+                actions: [actions.setNextTurn],
+              }, {
+                target: 'breakPause',
+                cond: (context) => context.turnsLeft === 0,
+                actions: [actions.setBreak],
+              },
+            ],
+          },
+        },
+        break: {
+          invoke: {
+            id: 'breakTimer',
+            src: actions.startTimer,
+          },
+          on: {
+            NEXT_TURN: {
+              target: 'paused',
+              actions: [actions.start],
+            },
+          },
+        },
+        breakPause: {
+          on: {
+            START: 'break',
+            NEXT_TURN: {
+              target: 'paused',
+              actions: [actions.start],
+            },
           },
         },
       },

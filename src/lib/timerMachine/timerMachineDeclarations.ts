@@ -11,15 +11,17 @@ export interface TimerContext {
 }
 
 export interface TimerStates {
-    states: {
-        timerOff: {},
-        timerOn: {
-          states: {
-            running: {},
-            paused: {}
-          }
-        }
+  states: {
+    timerOff: {},
+    timerOn: {
+      states: {
+        running: {},
+        paused: {},
+        break: {},
+        breakPause: {},
+      }
     }
+  }
 }
 
 export type StartEvent = { type: 'START'};

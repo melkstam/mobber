@@ -1,10 +1,9 @@
 import React, { ReactElement } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Fab } from '@material-ui/core';
-import { Play, Pause } from 'mdi-material-ui';
 import { TimerSend, TimerState } from '../lib/timerMachine/timerMachineDeclarations';
 import CurrentUser from '../components/CurrentUser';
 import TimerText from '../components/TimerText';
+import TimerButtons from '../components/TimerButtons';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   timerContainer: {
@@ -29,37 +28,23 @@ interface TimerPageProps {
 
 export default function TimerPage({ state, send }: TimerPageProps): ReactElement {
   const classes = useStyles();
-  let playPauseFab;
-  if (state.matches({ timerOn: 'paused' })) {
-    playPauseFab = (
-      <Fab
-        className={classes.fab}
-        onClick={() => send('START')}
-      >
-        <Play />
-      </Fab>
-    );
-  } else {
-    playPauseFab = (
-      <Fab
-        className={classes.fab}
-        onClick={() => send('PAUSE')}
-      >
-        <Pause />
-      </Fab>
-    );
-  }
 
+  const isBreak = state.matches({ timerOn: 'break' }) || state.matches({ timerOn: 'breakPause' });
   return (
     <div className={classes.timerContainer}>
       <TimerText state={state} />
 
+      { !isBreak && (
       <CurrentUser
         state={state}
         send={send}
       />
+      )}
 
-      {playPauseFab}
+      <TimerButtons
+        state={state}
+        send={send}
+      />
     </div>
   );
 }

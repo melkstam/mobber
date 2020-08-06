@@ -25,6 +25,18 @@ interface TimerTextProps {
 
 export default function TimerText({ state }: TimerTextProps): ReactElement {
   const classes = useStyles();
+
+  let supportText;
+  if (state.matches({ timerOn: 'running' })) {
+    const { turnsLeft } = state.context;
+    supportText = `${turnsLeft} ${turnsLeft === 1 ? 'turn' : 'turns'} left before break`;
+  } else if (state.matches({ timerOn: 'paused' })) {
+    const turnsLeft = state.context.turnsLeft + 1;
+    supportText = `${turnsLeft} ${turnsLeft === 1 ? 'turn' : 'turns'} left before break`;
+  } else if (state.matches({ timerOn: 'breakPause' })) {
+    supportText = 'Time for a break!';
+  }
+
   return (
     <div className={classes.timerTextContainer}>
       <span className={classes.timerText}>
@@ -32,9 +44,7 @@ export default function TimerText({ state }: TimerTextProps): ReactElement {
       </span>
 
       <Typography variant="body1" className={classes.turnsLeftText}>
-        {state.context.turnsLeft - 1}
-        {' '}
-        turns left before break
+        {supportText}
       </Typography>
     </div>
   );
