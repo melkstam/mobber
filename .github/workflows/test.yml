@@ -12,6 +12,7 @@ jobs:
         with:
           browser: chrome
           start: yarn start
+          wait-on: 'http://localhost:3000'
 
   unit-test:
     name: 'Unit tests'
