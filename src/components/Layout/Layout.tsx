@@ -1,9 +1,14 @@
 import React, { ReactElement, ReactNode } from 'react';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {
-  CssBaseline, AppBar, Toolbar, Typography, makeStyles, Theme, createStyles, Container,
+  createMuiTheme, ThemeProvider, createStyles, makeStyles, Theme,
+} from '@material-ui/core/styles';
+import {
+  CssBaseline, AppBar, Toolbar, Typography, Container, IconButton, Tooltip,
 } from '@material-ui/core';
 import { deepOrange } from '@material-ui/core/colors';
+import { ArrowLeft } from 'mdi-material-ui';
+
+import { TimerState, TimerSend } from '../../lib/timerMachine/timerMachineDeclarations';
 
 import 'typeface-roboto';
 import 'typeface-roboto-mono';
@@ -23,16 +28,26 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     padding: theme.spacing(2),
   },
   toolBar: {
+    display: 'flex',
+    justifyContent: 'center',
     backgroundColor: theme.palette.grey[900],
     minHeight: 64,
+    '& > *': {
+      flex: 1,
+    },
+    '& > *:nth-child(2)': {
+      textAlign: 'center',
+    },
   },
 }));
 
 interface LayoutProps {
-  children: ReactNode
+  children: ReactNode;
+  state: TimerState;
+  send: TimerSend;
 }
 
-export default function Layout({ children }: LayoutProps): ReactElement {
+export default function Layout({ children, state, send }: LayoutProps): ReactElement {
   const classes = useStyles();
   return (
     <ThemeProvider theme={darkTheme}>
@@ -42,9 +57,20 @@ export default function Layout({ children }: LayoutProps): ReactElement {
         position="sticky"
       >
         <Toolbar className={classes.toolBar}>
-          <Typography variant="h5">
+          <div>
+            {state.matches('timerOn')
+            && (
+            <Tooltip title="Back to options page">
+              <IconButton onClick={() => send('STOP')}><ArrowLeft /></IconButton>
+            </Tooltip>
+            )}
+          </div>
+
+          <Typography variant="h4">
             Mobber
           </Typography>
+
+          <div />
         </Toolbar>
       </AppBar>
 

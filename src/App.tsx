@@ -29,7 +29,10 @@ function App(): React.ReactElement {
   }
 
   return (
-    <Layout>
+    <Layout
+      state={state}
+      send={send}
+    >
       {contents}
     </Layout>
   );

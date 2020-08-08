@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+
 import { TimerSend, TimerState } from '../lib/timerMachine/timerMachineDeclarations';
 import CurrentUser from '../components/CurrentUser';
 import TimerText from '../components/TimerText';
