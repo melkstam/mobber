@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   chip: {
     fontSize: theme.typography.body1.fontSize,
     marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(0.5),
   },
 }));
 

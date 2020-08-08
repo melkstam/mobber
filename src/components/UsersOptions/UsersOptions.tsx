@@ -95,7 +95,6 @@ export default function UsersOptions({ state, send }: UsersOptionsProps): ReactE
             placeholder="New user…"
             data-testid="add-new-user-input"
             aria-label="Add new user"
-            margin="dense"
             value={name}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)}
             onKeyPress={(ev) => {
