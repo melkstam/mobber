@@ -26,6 +26,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       flexGrow: 1,
     },
   },
+  noUserText: {
+    color: theme.palette.text.hint,
+    fontStyle: 'italic',
+  },
 }));
 
 interface UsersOptionsProps {
@@ -79,6 +83,7 @@ export default function UsersOptions({ state, send }: UsersOptionsProps): ReactE
           Active users
         </Typography>
         <div data-testid="active-users-container">
+          {state.context.activeUsers.length === 0 && <Typography className={classes.noUserText}>No active users</Typography>}
           {state.context.activeUsers.map((user, index) => (
             <UserChip
               key={user}
@@ -118,6 +123,7 @@ export default function UsersOptions({ state, send }: UsersOptionsProps): ReactE
         <Typography variant="h6">
           Inactive users
         </Typography>
+        {state.context.activeUsers.length === 0 && <Typography className={classes.noUserText}>No inactive users</Typography>}
         <div data-testid="inactive-users-container">
           {state.context.inactiveUsers.map((user, index) => (
             <UserChip
