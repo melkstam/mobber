@@ -59,10 +59,16 @@ export default function CurrentUser({ state, send }: CurrentUsersProps): ReactEl
 
       <div className={classes.usersContainer}>
         <Typography variant="h6">Driver:</Typography>
-        <Chip label={state.context.activeUsers[0]} />
+        <Chip
+          label={state.context.activeUsers[0]}
+          data-testid="current-driver-user"
+        />
 
         <Typography variant="h6">Up next:</Typography>
-        <Chip label={state.context.activeUsers[1]} />
+        <Chip
+          label={state.context.activeUsers[1]}
+          data-testid="next-driver-user"
+        />
       </div>
 
       <Tooltip title="Next driver">

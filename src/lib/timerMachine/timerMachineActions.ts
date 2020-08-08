@@ -71,22 +71,22 @@ export const updateInactiveUsers = assign<TimerContext, UpdateInactiveUsersEvent
 });
 
 export const start = assign<TimerContext, StartEvent | NextTurnEvent>({
-  timeLeft: (context) => context.turnTime * 60 * 10,
+  timeLeft: (context) => context.turnTime * 60 * 1000,
   turnsLeft: (context) => context.breakTurns - 1,
 });
 
 export const setNextTurn = assign<TimerContext, NextTurnEvent>({
   activeUsers: (context) => rotateArray(context.activeUsers),
-  timeLeft: (context) => context.turnTime * 60 * 10,
+  timeLeft: (context) => context.turnTime * 60 * 1000,
   turnsLeft: (context) => context.turnsLeft - 1,
 });
 
 export const setPrevTurn = assign<TimerContext, PrevTurnEvent>({
   activeUsers: (context) => rotateArray(context.activeUsers, -1),
-  timeLeft: (context) => context.turnTime * 60 * 10,
+  timeLeft: (context) => context.turnTime * 60 * 1000,
   turnsLeft: (context) => context.turnsLeft + 1,
 });
 
 export const setBreak = assign<TimerContext, StartEvent | NextTurnEvent>({
-  timeLeft: (context) => context.breakTime * 60 * 10,
+  timeLeft: (context) => context.breakTime * 60 * 1000,
 });

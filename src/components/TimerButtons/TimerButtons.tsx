@@ -28,6 +28,7 @@ export default function TimerButtons({ state, send }: TimerButtonsProps): ReactE
       <Fab
         aria-label="Start"
         onClick={() => send('START')}
+        data-testid="start-timer-button"
       >
         <Play />
       </Fab>
@@ -37,6 +38,7 @@ export default function TimerButtons({ state, send }: TimerButtonsProps): ReactE
       <Fab
         aria-label="Pause"
         onClick={() => send('PAUSE')}
+        data-testid="pause-timer-button"
       >
         <Pause />
       </Fab>
@@ -47,6 +49,7 @@ export default function TimerButtons({ state, send }: TimerButtonsProps): ReactE
         aria-label="Skip break"
         variant="extended"
         onClick={() => send('NEXT_TURN')}
+        data-testid="skip-break-button"
       >
         Skip break
       </Fab>
@@ -58,6 +61,7 @@ export default function TimerButtons({ state, send }: TimerButtonsProps): ReactE
           aria-label="Skip break"
           variant="extended"
           onClick={() => send('NEXT_TURN')}
+          data-testid="skip-break-button"
         >
           Skip break
         </Fab>
@@ -66,6 +70,7 @@ export default function TimerButtons({ state, send }: TimerButtonsProps): ReactE
           variant="extended"
           color="primary"
           onClick={() => send('START')}
+          data-testid="take-break-button"
         >
           Take break
         </Fab>

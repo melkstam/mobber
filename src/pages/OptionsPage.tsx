@@ -44,6 +44,7 @@ export default function OptionsPage({ state, send }: OptionsPageProps): ReactEle
         variant="extended"
         color="primary"
         onClick={() => send('START')}
+        data-testid="start-mobbing-button"
       >
         Start mobbing
       </Fab>
