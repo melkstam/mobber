@@ -1,8 +1,6 @@
 import React from 'react';
 import { useMachine } from '@xstate/react';
 
-import './App.css';
-
 import timerMachine from './lib/timerMachine/timerMachine';
 import OptionsPage from './pages/OptionsPage';
 import TimerPage from './pages/TimerPage';
