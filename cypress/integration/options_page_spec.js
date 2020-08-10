@@ -36,6 +36,13 @@ describe('Options page', () => {
     cy.get('[data-testid=inactive-users-container]').children().first().click();
     cy.get('[data-testid=inactive-users-container]').should('not.contain.text', 'Nora');
     cy.get('[data-testid=active-users-container]').should('contain.text', 'Nora');
+
+    // Add user and shuffle
+    cy.get('[data-testid=add-new-user-input]').type('Peter{enter}');
+    cy.get('button[data-testid=shuffle-users-button]').click();
+    cy.get('[data-testid=active-users-container]').should('contain.text', 'Peter');
+    cy.get('[data-testid=active-users-container]').should('contain.text', 'Mia');
+    cy.get('[data-testid=active-users-container]').should('contain.text', 'Nora');
   });
 
   it('can set time', () => {

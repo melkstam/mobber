@@ -65,4 +65,27 @@ describe('<UsersOptions />', () => {
 
     expect(sendMock).not.toHaveBeenCalled();
   });
+
+  it('shuffles users on shuffle button click', () => {
+    const context: Pick<TimerState['context'], 'activeUsers' | 'inactiveUsers'> = {
+      activeUsers: ['Liam', 'Emma', 'Noah'],
+      inactiveUsers: ['Harper', 'Mason', 'Evelyn', 'Logan'],
+    };
+
+    const sendMock = jest.fn();
+
+    const { getByTestId } = render(
+      <UsersOptions
+        state={{ context } as TimerState}
+        send={sendMock}
+      />,
+    );
+
+    fireEvent.click(getByTestId('shuffle-users-button'));
+
+    expect(sendMock).toHaveBeenCalledTimes(1);
+    expect(sendMock).toHaveBeenCalledWith(expect.objectContaining({
+      users: expect.arrayContaining(context.activeUsers),
+    }));
+  });
 });
