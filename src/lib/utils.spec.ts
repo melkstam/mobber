@@ -1,4 +1,4 @@
-import { msToText, rotateArray } from './utils';
+import { msToText, rotateArray, shuffleArray } from './utils';
 
 describe('msToText', () => {
   it.each([
@@ -30,5 +30,19 @@ describe('rotateArray', () => {
     [[1, 2, 3, 4, 5], 2, [3, 4, 5, 1, 2]],
   ])('%p rotates %i steps to %p', (input, steps, expected) => {
     expect(rotateArray(input, steps)).toStrictEqual(expected);
+  });
+});
+
+describe('shuffleArray', () => {
+  it.each([
+    [[]],
+    [[1, 2, 3]],
+    [['Hi', true, 5]],
+    [[{}, undefined, undefined]],
+  ])('keeps array in the same format', (array) => {
+    const shuffled = shuffleArray(array);
+
+    expect(shuffled).toHaveLength(array.length);
+    expect(shuffled).toEqual(expect.arrayContaining(array));
   });
 });

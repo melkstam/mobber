@@ -13,3 +13,12 @@ export const msToText = (ms: number): string => {
 export const rotateArray = <T>(array: T[], n = 1): T[] => (
   array.slice(n, array.length).concat(array.slice(0, n))
 );
+
+export const shuffleArray = <T>(array: T[]): T[] => {
+  const a = [...array];
+  for (let i = a.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
