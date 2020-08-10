@@ -1,11 +1,12 @@
 import React, { ReactElement } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import {
-  Paper, Typography, TextField, IconButton,
+  Paper, Typography, TextField, IconButton, Tooltip,
 } from '@material-ui/core';
-import { Plus } from 'mdi-material-ui';
+import { Plus, Shuffle } from 'mdi-material-ui';
 import { TimerState, TimerSend } from '../../lib/timerMachine/timerMachineDeclarations';
 import UserChip from '../UserChip';
+import { shuffleArray } from '../../lib/utils';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   container: {
@@ -18,6 +19,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     '&:not(:last-child)': {
       marginBottom: theme.spacing(2),
     },
+  },
+  activeUsersTitleRow: {
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   newUserContainer: {
     display: 'flex',
@@ -75,13 +80,31 @@ export default function UsersOptions({ state, send }: UsersOptionsProps): ReactE
     send({ type: 'UPDATE_INACTIVE_USERS', users: inactiveUsers });
   };
 
+  const handleShuffleUsers = () => {
+    const shuffledUsers = shuffleArray(state.context.activeUsers);
+    send({ type: 'UPDATE_ACTIVE_USERS', users: shuffledUsers });
+  };
+
   const classes = useStyles();
   return (
     <div className={classes.container}>
       <Paper className={classes.usersBox}>
-        <Typography variant="h6">
-          Active users
-        </Typography>
+        <div className={classes.activeUsersTitleRow}>
+          <Typography variant="h6">
+            Active users
+          </Typography>
+
+          <Tooltip title="Shuffle users">
+            <IconButton
+              size="small"
+              onClick={handleShuffleUsers}
+              data-testid="shuffle-users-button"
+            >
+              <Shuffle />
+            </IconButton>
+          </Tooltip>
+        </div>
+
         <div data-testid="active-users-container">
           {state.context.activeUsers.length === 0 && <Typography className={classes.noUserText}>No active users</Typography>}
           {state.context.activeUsers.map((user, index) => (
