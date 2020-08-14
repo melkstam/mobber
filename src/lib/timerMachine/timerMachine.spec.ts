@@ -1,5 +1,16 @@
 import { interpret } from 'xstate';
 import timerMachine from './timerMachine';
+import * as timerActions from './timerMachineActions';
+
+jest.mock('./timerMachineActions', () => {
+  const moduleMock = require.requireActual('./timerMachineActions');
+  return {
+    ...moduleMock,
+
+    minimize: jest.fn(),
+    maximize: jest.fn(),
+  };
+});
 
 describe('Timer machine', () => {
   describe('States', () => {

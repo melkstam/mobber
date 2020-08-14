@@ -14,6 +14,15 @@ import {
 } from './timerMachineDeclarations';
 import { rotateArray } from '../utils';
 
+declare global {
+  interface Window {
+    ipcRenderer: {
+      invoke: (name: string) => void
+    }
+  }
+}
+const { ipcRenderer } = window;
+
 export const startTimer: InvokeCreator<TimerContext> = (
   context,
 ): InvokeCallback => (
@@ -90,3 +99,11 @@ export const setPrevTurn = assign<TimerContext, PrevTurnEvent>({
 export const setBreak = assign<TimerContext, StartEvent | NextTurnEvent>({
   timeLeft: (context) => context.breakTime * 60 * 1000,
 });
+
+export const minimize = (): void => {
+  ipcRenderer.invoke('minimize');
+};
+
+export const maximize = (): void => {
+  ipcRenderer.invoke('maximize');
+};

@@ -2,7 +2,11 @@ describe('Timer page', () => {
   it('can run through a full loop of turns', () => {
     cy.clock();
 
-    cy.visit('/');
+    cy.visit('/', {
+      onBeforeLoad(win) {
+        win.ipcRenderer = { invoke: cy.stub() };
+      },
+    });
 
     // Low numbers to increase performance
     const turnTime = 2;

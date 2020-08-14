@@ -43,6 +43,8 @@ const timerMachine = Machine<TimerContext, TimerStates, TimerEvent>({
       initial: 'running',
       states: {
         running: {
+          entry: [actions.minimize],
+          exit: [actions.maximize],
           invoke: {
             id: 'tickTimer',
             src: actions.startTimer,
