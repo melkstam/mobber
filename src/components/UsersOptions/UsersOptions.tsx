@@ -146,7 +146,7 @@ export default function UsersOptions({ state, send }: UsersOptionsProps): ReactE
         <Typography variant="h6">
           Inactive users
         </Typography>
-        {state.context.activeUsers.length === 0 && <Typography className={classes.noUserText}>No inactive users</Typography>}
+        {state.context.inactiveUsers.length === 0 && <Typography className={classes.noUserText}>No inactive users</Typography>}
         <div data-testid="inactive-users-container">
           {state.context.inactiveUsers.map((user, index) => (
             <UserChip
