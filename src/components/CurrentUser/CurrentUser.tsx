@@ -48,6 +48,8 @@ export default function CurrentUser({ state, send }: CurrentUsersProps): ReactEl
     send('PREV_TURN');
   };
 
+  const oneActive = state.context.activeUsers.length === 1;
+
   const classes = useStyles();
   return (
     <div className={classes.container}>
@@ -64,11 +66,15 @@ export default function CurrentUser({ state, send }: CurrentUsersProps): ReactEl
           data-testid="current-driver-user"
         />
 
-        <Typography variant="h6">Up next:</Typography>
-        <Chip
-          label={state.context.activeUsers[1]}
-          data-testid="next-driver-user"
-        />
+        {oneActive && (
+        <>
+          <Typography variant="h6">Up next:</Typography>
+          <Chip
+            label={state.context.activeUsers[1]}
+            data-testid="next-driver-user"
+          />
+        </>
+        )}
       </div>
 
       <Tooltip title="Next driver">
