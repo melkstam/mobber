@@ -66,7 +66,7 @@ export default function CurrentUser({ state, send }: CurrentUsersProps): ReactEl
           data-testid="current-driver-user"
         />
 
-        {oneActive && (
+        {!oneActive && (
         <>
           <Typography variant="h6">Up next:</Typography>
           <Chip

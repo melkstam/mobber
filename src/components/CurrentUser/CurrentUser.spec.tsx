@@ -43,7 +43,7 @@ describe('<CurrentUser />', () => {
   it('doesn\'t display up next when only one active user', () => {
     const stateOneActive: RecursivePartial<TimerState> = {
       context: {
-        activeUsers: ['Eric', 'Sophie', 'Nathan'],
+        activeUsers: ['Eric'],
       },
     };
 
