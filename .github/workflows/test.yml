@@ -3,7 +3,7 @@ name: Tests
 on: [push]
 
 jobs:
-  e22-test:
+  e2e-test:
     name: 'End-to-end tests'
     runs-on: ubuntu-latest
     steps:
@@ -16,18 +16,18 @@ jobs:
 
   unit-test:
     name: 'Unit tests'
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
-        node-version: [12.x]
+        os: [macos-latest, windows-latest, ubuntu-latest]
 
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js v12
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 12
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -38,9 +38,9 @@ jobs:
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-${{ matrix.node-version }}-yarn-
+            ${{ runner.os }}-yarn-
 
       - run: yarn
       - run: yarn test
