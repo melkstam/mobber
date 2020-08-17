@@ -10,7 +10,7 @@
     "build-electron": "run-script-os",
     "build-electron:darwin:linux": "mkdir build/src && cp -r electron/. build/electron",
     "build-electron:win32": "mkdir build\\src && xcopy electron build\\electron\\",
-    "package": "yarn run build && yarn run build-electron && electron-builder build --win -c.extraMetadata.main=build/electron/main.js --publish never",
+    "package": "yarn run build && yarn run build-electron && electron-builder build -c.extraMetadata.main=build/electron/main.js --publish never",
     "start": "cross-env BROWSER=none react-scripts start",
     "start-electron": "cross-env ELECTRON_START_URL=http://localhost:3000 electron .",
     "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
