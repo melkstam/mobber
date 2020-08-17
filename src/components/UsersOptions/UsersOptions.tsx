@@ -132,13 +132,16 @@ export default function UsersOptions({ state, send }: UsersOptionsProps): ReactE
               }
             }}
           />
-          <IconButton
-            size="small"
-            onClick={handleOnAddUser}
-            data-testid="submit-button"
-          >
-            <Plus />
-          </IconButton>
+
+          <Tooltip title="Add user">
+            <IconButton
+              size="small"
+              onClick={handleOnAddUser}
+              data-testid="submit-button"
+            >
+              <Plus />
+            </IconButton>
+          </Tooltip>
         </div>
       </Paper>
 
