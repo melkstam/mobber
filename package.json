@@ -34,6 +34,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@xstate/react": "^0.8.1",
+    "electron-store": "^6.0.0",
     "mdi-material-ui": "^6.17.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -64,7 +65,7 @@
     "eslint-plugin-react": "^7.20.0",
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "run-script-os": "^1.1.1",
-    "typescript": "~3.7.2"
+    "typescript": "~3.9.7"
   },
   "build": {
     "appId": "com.melkstam.mobber",

@@ -122,6 +122,9 @@ const timerMachine = Machine<TimerContext, TimerStates, TimerEvent>({
     UPDATE_INACTIVE_USERS: {
       actions: [actions.updateInactiveUsers],
     },
+    UPDATE_OPTIONS: {
+      actions: [actions.updateOptions],
+    },
   },
 });
 

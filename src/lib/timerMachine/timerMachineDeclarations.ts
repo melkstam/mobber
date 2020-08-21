@@ -10,6 +10,8 @@ export interface TimerContext {
   turnsLeft: number;
 }
 
+export type TimerContextOptions = Omit<TimerContext, 'timeLeft' | 'turnsLeft'>;
+
 export interface TimerStates {
   states: {
     timerOff: {},
@@ -35,6 +37,7 @@ export type UpdateBreakTimeEvent = { type: 'UPDATE_BREAK_TIME', time: number };
 export type UpdateBreakTurnsEvent = { type: 'UPDATE_BREAK_TURNS', turns: number };
 export type UpdateActiveUsersEvent = { type: 'UPDATE_ACTIVE_USERS', users: string[] };
 export type UpdateInactiveUsersEvent = { type: 'UPDATE_INACTIVE_USERS', users: string[] };
+export type UpdateOptionsEvent = { type: 'UPDATE_OPTIONS', options: TimerContextOptions };
 
 export type TimerEvent =
     | StartEvent
@@ -47,7 +50,8 @@ export type TimerEvent =
     | UpdateBreakTimeEvent
     | UpdateBreakTurnsEvent
     | UpdateActiveUsersEvent
-    | UpdateInactiveUsersEvent;
+    | UpdateInactiveUsersEvent
+    | UpdateOptionsEvent;
 
 export type TimerState = State<TimerContext, TimerEvent, TimerStates>;
 export type TimerSend = Interpreter<TimerContext, TimerStates, TimerEvent>['send'];
