@@ -6,11 +6,12 @@
   "license": "MIT",
   "main": "electron/main.js",
   "scripts": {
-    "build": "react-scripts build",
+    "build": "yarn run build-react && yarn run build-electron",
+    "build-react": "react-scripts build",
     "build-electron": "run-script-os",
     "build-electron:darwin:linux": "mkdir build/src && cp -r electron/. build/electron",
     "build-electron:win32": "mkdir build\\src && xcopy electron build\\electron\\",
-    "package": "yarn run build && yarn run build-electron && electron-builder build -c.extraMetadata.main=build/electron/main.js --publish never",
+    "package": "yarn run build && electron-builder build -c.extraMetadata.main=build/electron/main.js --publish never",
     "start": "cross-env BROWSER=none react-scripts start",
     "start-electron": "cross-env ELECTRON_START_URL=http://localhost:3000 electron .",
     "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
@@ -34,6 +35,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@xstate/react": "^0.8.1",
+    "electron-store": "^6.0.0",
     "mdi-material-ui": "^6.17.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -64,7 +66,7 @@
     "eslint-plugin-react": "^7.20.0",
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "run-script-os": "^1.1.1",
-    "typescript": "~3.7.2"
+    "typescript": "~3.9.7"
   },
   "build": {
     "appId": "com.melkstam.mobber",

@@ -11,16 +11,10 @@ import {
   NextTurnEvent,
   PrevTurnEvent,
   StartEvent,
+  UpdateOptionsEvent,
 } from './timerMachineDeclarations';
 import { rotateArray } from '../utils';
 
-declare global {
-  interface Window {
-    ipcRenderer: {
-      invoke: (name: string) => void
-    }
-  }
-}
 const { ipcRenderer } = window;
 
 export const startTimer: InvokeCreator<TimerContext> = (
@@ -42,6 +36,14 @@ export const startTimer: InvokeCreator<TimerContext> = (
 
 export const tickTimer = assign<TimerContext, TickEvent>({
   timeLeft: (context) => context.timeLeft - 100,
+});
+
+export const updateOptions = assign<TimerContext, UpdateOptionsEvent>({
+  turnTime: (_, event) => event.options.turnTime,
+  breakTime: (_, event) => event.options.breakTime,
+  breakTurns: (_, event) => event.options.breakTurns,
+  activeUsers: (_, event) => event.options.activeUsers,
+  inactiveUsers: (_, event) => event.options.inactiveUsers,
 });
 
 export const updateTurnTime = assign<TimerContext, UpdateTurnTimeEvent>({

@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import { Fab } from '@material-ui/core';
+import { Fab, Tooltip } from '@material-ui/core';
 import { Play, Pause } from 'mdi-material-ui';
 import { TimerState, TimerSend } from '../../lib/timerMachine/timerMachineDeclarations';
 
@@ -25,23 +25,27 @@ export default function TimerButtons({ state, send }: TimerButtonsProps): ReactE
   let buttons;
   if (state.matches({ timerOn: 'paused' })) {
     buttons = (
-      <Fab
-        aria-label="Start"
-        onClick={() => send('START')}
-        data-testid="start-timer-button"
-      >
-        <Play />
-      </Fab>
+      <Tooltip title="Start timer">
+        <Fab
+          aria-label="Start"
+          onClick={() => send('START')}
+          data-testid="start-timer-button"
+        >
+          <Play />
+        </Fab>
+      </Tooltip>
     );
   } else if (state.matches({ timerOn: 'running' })) {
     buttons = (
-      <Fab
-        aria-label="Pause"
-        onClick={() => send('PAUSE')}
-        data-testid="pause-timer-button"
-      >
-        <Pause />
-      </Fab>
+      <Tooltip title="Pause timer">
+        <Fab
+          aria-label="Pause"
+          onClick={() => send('PAUSE')}
+          data-testid="pause-timer-button"
+        >
+          <Pause />
+        </Fab>
+      </Tooltip>
     );
   } else if (state.matches({ timerOn: 'break' })) {
     buttons = (

@@ -1,6 +1,10 @@
 describe('Options page', () => {
   it('can set users', () => {
-    cy.visit('/');
+    cy.visit('/', {
+      onBeforeLoad(win) {
+        win.ipcRenderer = { invoke: cy.stub().returns(new Promise((resolve) => resolve(undefined))) };
+      },
+    });
 
     // By ending with enter
     cy.get('[data-testid=add-new-user-input]').type('Eric{enter}');
@@ -46,7 +50,11 @@ describe('Options page', () => {
   });
 
   it('can set time', () => {
-    cy.visit('/');
+    cy.visit('/', {
+      onBeforeLoad(win) {
+        win.ipcRenderer = { invoke: cy.stub().returns(new Promise((resolve) => resolve(undefined))) };
+      },
+    });
 
     // Turn time
     cy.get('input[aria-label="Set turn time"]').type('10');
