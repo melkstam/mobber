@@ -1,7 +1,7 @@
 {
-  "name": "mobber2",
+  "name": "mobber",
   "version": "0.2.0",
-  "private": true,
+  "private": false,
   "homepage": "./",
   "license": "MIT",
   "main": "electron/main.js",
