@@ -4,7 +4,7 @@ describe('Timer page', () => {
 
     cy.visit('/', {
       onBeforeLoad(win) {
-        win.ipcRenderer = { invoke: cy.stub() };
+        win.ipcRenderer = { invoke: cy.stub().returns(new Promise((resolve) => resolve(undefined))) };
       },
     });
 

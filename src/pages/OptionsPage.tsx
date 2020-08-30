@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
-import { Fab } from '@material-ui/core';
+import { Fab, Tooltip } from '@material-ui/core';
 import { TimerState, TimerSend } from '../lib/timerMachine/timerMachineDeclarations';
 import TimerOptions from '../components/TimerOptions';
 import UsersOptions from '../components/UsersOptions';
@@ -29,6 +29,7 @@ interface OptionsPageProps {
 
 export default function OptionsPage({ state, send }: OptionsPageProps): ReactElement {
   const classes = useStyles();
+  const noActive = state.context.activeUsers.length === 0;
   return (
     <div className={classes.optionsContainer}>
       <TimerOptions
@@ -39,15 +40,20 @@ export default function OptionsPage({ state, send }: OptionsPageProps): ReactEle
         state={state}
         send={send}
       />
-      <Fab
-        className={classes.fab}
-        variant="extended"
-        color="primary"
-        onClick={() => send('START')}
-        data-testid="start-mobbing-button"
-      >
-        Start mobbing
-      </Fab>
+
+      <Tooltip title={noActive ? 'Add at least one active user to start mobbing' : ''}>
+        <span className={classes.fab}>
+          <Fab
+            disabled={noActive}
+            variant="extended"
+            color="primary"
+            onClick={() => send('START')}
+            data-testid="start-mobbing-button"
+          >
+            Start mobbing
+          </Fab>
+        </span>
+      </Tooltip>
     </div>
   );
 }

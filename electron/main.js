@@ -2,6 +2,10 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
 
+const Store = require('electron-store');
+
+const optionsStore = new Store();
+
 let mainWindow;
 
 const createWindow = () => {
@@ -55,3 +59,7 @@ ipcMain.handle('maximize', async () => {
   mainWindow.restore();
   mainWindow.show();
 });
+
+ipcMain.handle('saveOptions', async (_, options) => optionsStore.set('options', options));
+
+ipcMain.handle('getOptions', async () => optionsStore.get('options'));
