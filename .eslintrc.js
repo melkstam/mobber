@@ -28,7 +28,7 @@ module.exports = {
     "settings": {
         "import/resolver": {
             "node": {
-            "extensions": [".js", ".jsx", ".ts", ".tsx"]
+                "extensions": [".js", ".jsx", ".ts", ".tsx"]
             }
         }
     },
@@ -37,6 +37,9 @@ module.exports = {
         "./build/**/*"
     ],
     "rules": {
+        // note you must disable the base rule as it can report incorrect errors
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": ["error"],
         // Use .tsx instead of .jsx
         "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
         // Allow imports without extension
@@ -45,6 +48,6 @@ module.exports = {
             "jsx": "never",
             "ts": "never",
             "tsx": "never",
-          }]
+        }]
     }
 };
