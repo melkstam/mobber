@@ -37,6 +37,6 @@ export default function UserChip({
 
 UserChip.defaultProps = {
   driver: false,
-  onClick: () => {},
-  onClear: () => {},
+  onClick: () => { /* Do nothing */ },
+  onClear: () => { /* Do nothing */ },
 };

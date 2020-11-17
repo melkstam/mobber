@@ -3,7 +3,7 @@ import timerMachine from './timerMachine';
 import * as timerActions from './timerMachineActions';
 
 jest.mock('./timerMachineActions', () => {
-  const moduleMock = require.requireActual('./timerMachineActions');
+  const moduleMock = jest.requireActual('./timerMachineActions');
   return {
     ...moduleMock,
 
